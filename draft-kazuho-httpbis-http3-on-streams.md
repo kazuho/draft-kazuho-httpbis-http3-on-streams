@@ -121,7 +121,10 @@ TODO Security
 
 # IANA Considerations
 
-This document has no IANA actions.
+If this document is adopted and published as an RFC, it will have an action to
+create a new registration for the identification of HTTP/3 over QMux version 1
+in the "TLS Application-Layer Protocol Negotiation (ALPN) Protocol IDs" registry
+established in {{ALPN}}.
 
 
 --- back
