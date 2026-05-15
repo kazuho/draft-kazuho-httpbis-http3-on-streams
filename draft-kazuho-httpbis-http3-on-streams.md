@@ -108,12 +108,6 @@ The ALPN ID defined by this draft revision is "h3qx-01", which represents HTTP/3
 over draft-ietf-quic-qmux-01.
 
 
-# Support for Extended CONNECT
-
-Servers speaking HTTP/3 over QMux MUST implement the Extended CONNECT scheme
-defined in {{!EXT-CONNECT3=RFC9220}}.
-
-
 # Security Considerations
 
 TODO Security
