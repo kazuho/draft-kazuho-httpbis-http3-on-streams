@@ -67,12 +67,11 @@ Table of Contents
    3.  The Protocol
    4.  Starting HTTP/3 over QMux
      4.1.  Draft Version Identification
-   5.  Support for Extended CONNECT
-   6.  Security Considerations
-   7.  IANA Considerations
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+   5.  Security Considerations
+   6.  IANA Considerations
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -149,32 +148,22 @@ Table of Contents
    The ALPN ID defined by this draft revision is "h3qx-01", which
    represents HTTP/3 over draft-ietf-quic-qmux-01.
 
-5.  Support for Extended CONNECT
-
-   Servers speaking HTTP/3 over QMux MUST implement the Extended CONNECT
-   scheme defined in [EXT-CONNECT3].
-
-6.  Security Considerations
+5.  Security Considerations
 
    TODO Security
 
-7.  IANA Considerations
+6.  IANA Considerations
 
    This document has no IANA actions.
 
-8.  References
+7.  References
 
-8.1.  Normative References
+7.1.  Normative References
 
    [ALPN]     Friedl, S., Popov, A., Langley, A., and E. Stephan,
               "Transport Layer Security (TLS) Application-Layer Protocol
               Negotiation Extension", RFC 7301, DOI 10.17487/RFC7301,
               July 2014, <https://www.rfc-editor.org/rfc/rfc7301>.
-
-   [EXT-CONNECT3]
-              Hamilton, R., "Bootstrapping WebSockets with HTTP/3",
-              RFC 9220, DOI 10.17487/RFC9220, June 2022,
-              <https://www.rfc-editor.org/rfc/rfc9220>.
 
    [HTTP]     Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
               Ed., "HTTP Semantics", STD 97, RFC 9110,
@@ -206,7 +195,7 @@ Table of Contents
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/rfc/rfc8446>.
 
-8.2.  Informative References
+7.2.  Informative References
 
    [HTTP/2]   Thomson, M., Ed. and C. Benfield, Ed., "HTTP/2", RFC 9113,
               DOI 10.17487/RFC9113, June 2022,
