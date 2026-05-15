@@ -1,6 +1,6 @@
 ---
 title: "HTTP/3 over QMux"
-docname: draft-kazuho-httpbis-http3-on-streams-latest
+docname: draft-kazuho-httpbis-http3-over-qmux-latest
 category: std
 wg: httpbis
 ipr: trust200902
