@@ -1,5 +1,5 @@
 ---
-title: "HTTP/3 on Streams"
+title: "HTTP/3 over QMux"
 docname: draft-kazuho-httpbis-http3-on-streams-latest
 category: std
 wg: httpbis
@@ -22,21 +22,29 @@ author:
     email: jri.ietf@gmail.com
 
 normative:
-  HTTP-SEMANTICS: RFC9110
+  HTTP: RFC9110
+  RFC9112:
+    display: HTTP/1.1
+  RFC9114:
+    display: HTTP/3
+  QMUX: I-D.ietf-quic-qmux-01
+
+informative:
+  RFC9113:
+    display: HTTP/2
 
 --- abstract
 
-This document specifies how to use HTTP/3 on top of bi-directional,
-byte-oriented streams such as TLS over TCP.
+This document specifies how to use HTTP/3 over QMux.
 
 
 --- middle
 
 # Introduction
 
-As of 2023, HTTP/2 {{?HTTP2=RFC9113}} remains the most widely used version of
+As of 2023, HTTP/2 {{RFC9113}} remains the most widely used version of
 HTTP across the Internet, although the adoption rate of HTTP/3
-{{!HTTP3=RFC9114}} is increasing rapidly.
+{{RFC9114}} is increasing rapidly.
 
 HTTP/3 has several advantages over HTTP/2, primarily due to its use of QUIC
 {{?QUIC=RFC9000}} as the transport layer protocol, which provides features like
@@ -58,10 +66,8 @@ stacks require ongoing maintenance to address bugs, performance issues, and
 vulnerabilities.
 
 To address this redundancy, this specification defines the method of running
-HTTP/3 over TCP, utilizing QUIC on Streams
-{{!QUIC-ON-STREAMS=I-D.kazuho-quic-quic-on-streams-00}} as the basis. QUIC on
-Streams, acting as a polyfill of QUIC atop bi-directional byte streams, enables
-the operation of HTTP/3 over TCP without any modifications.
+HTTP/3 over QMux version 1 {{QMUX}}, which enables the operation of HTTP/3 over
+TCP and TLS without any modifications.
 
 Consequently, design, implementation, and maintenance efforts can concentrate on
 a single HTTP version: HTTP/3.
@@ -75,35 +81,36 @@ a single HTTP version: HTTP/3.
 # The Protocol
 
 HTTP/3 functions over QUIC version 1, employing the set of operations (i.e.,
-API) defined in {{Section 2.4 and Section 5.3 of QUIC}}. Conversely, HTTP/3 on
-Streams utilizes the same set of operations but functions over QUIC on Streams
-instead.
+API) defined in {{Section 2.4 and Section 5.3 of QUIC}}. HTTP/3 over QMux
+version 1 utilizes the same set of operations that are available in QMux.
 
 
-# Starting HTTP/3 on Streams
+# Starting HTTP/3 over QMux
 
-HTTP/3 on Streams can be used for “http” and “https” URI schemes defined in
-{{Section 4.2 of HTTP-SEMANTICS}} with the same default port numbers as HTTP/1.1
-{{!HTTP1=RFC9112}}.
+HTTP/3 over QMux version 1 can be used for “https” URI schemes defined in
+{{Section 4.2 of HTTP}} with the same default port number as HTTP/1.1
+{{RFC9112}}.
 
-When starting HTTP/3 on Streams for “https” URIs, clients use the TLS
-{{!TLS13=RFC8446}} with the ALPN {{!ALPN=RFC7301}} extension: “h3s”.
+When a client uses HTTP/3 over QMux for an "https" URI scheme, it uses TLS
+{{!TLS=RFC8446}} with ALPN {{!ALPN=RFC7301}} as described in {{Section 8 of
+QMUX}}. The ALPN ID for the final, published RFC is "h3qx". Until such
+an RFC exists, implementations MUST NOT identify themselves using this string.
 
-Also, clients may learn that a particular server supports HTTP/3 on Streams by
-other means. A client that knows that a server supports HTTP/3 on Streams can
-establish a TCP connection and start exchanging HTTP/3 frames using QUIC on
-Streams.
+## Draft Version Identification
 
-The latter is the only way to discover HTTP/3 on Streams for “http” URIs.
+\[\[RFC editor: please remove this section before publication.]]
 
-When used in cleartext, servers can determine if or not the client is speaking
-HTTP/3 on Streams by comparing the first eight bytes to the encoded form of the
-QS_TRANSPORT_PARAMETERS frame type (Section 4.2 of {{QUIC-ON-STREAMS}}).
+This draft describes HTTP/3 over draft version of QMux. In order to support
+interoperability over revisions, HTTP/3 over QMux drafts define an ALPN ID that
+captures both this document revision and the QMux revision in use.
+
+The ALPN ID defined by this draft revision is "h3qx-01", which represents HTTP/3
+over draft-ietf-quic-qmux-01.
 
 
 # Support for Extended CONNECT
 
-Servers speaking HTTP/3 on Streams MUST implement the Extended CONNECT scheme
+Servers speaking HTTP/3 over QMux MUST implement the Extended CONNECT scheme
 defined in {{!EXT-CONNECT3=RFC9220}}.
 
 
