@@ -5,10 +5,10 @@
 httpbis                                                           K. Oku
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                               L. Pardue
-Expires: 29 September 2024                                    Cloudflare
+Expires: 16 November 2026                                     Cloudflare
                                                               J. Iyengar
                                                                   Fastly
-                                                           28 March 2024
+                                                             15 May 2026
 
 
                            HTTP/3 on Streams
@@ -45,11 +45,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 September 2024.
+   This Internet-Draft will expire on 16 November 2026.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
