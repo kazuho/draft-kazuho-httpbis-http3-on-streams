@@ -150,7 +150,8 @@ Table of Contents
 
 5.  Security Considerations
 
-   TODO Security
+   The security considerations from Section 10 of [HTTP/3] and
+   Section 12 of [QMUX] apply.
 
 6.  IANA Considerations
 
