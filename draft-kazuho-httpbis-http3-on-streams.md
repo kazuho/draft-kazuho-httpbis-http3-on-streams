@@ -110,8 +110,8 @@ over draft-ietf-quic-qmux-01.
 
 # Security Considerations
 
-TODO Security
-
+The security considerations from {{Section 10 of RFC9114}} and {{Section 12 of
+QMUX}} apply.
 
 # IANA Considerations
 
