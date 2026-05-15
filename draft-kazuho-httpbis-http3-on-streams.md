@@ -84,6 +84,21 @@ HTTP/3 functions over QUIC version 1, employing the set of operations (i.e.,
 API) defined in {{Section 2.4 and Section 5.3 of QUIC}}. HTTP/3 over QMux
 version 1 utilizes the same set of operations that are available in QMux.
 
+## QPACK Considerations
+
+HTTP/3 uses QPACK {{!QPACK=RFC9204}} for field compression as described in
+{{Section 4.2.1 of RFC9114}}. QPACK was designed for correctness when operating
+over QUIC version 1, which does not provide guarantees of global ordering across
+streams. It provides flexibility for implementations to balance resilience against
+head-of-line blocking and optimal compression ratio.
+
+QMux version 1 is designed to work on top of a transport layer that guarantees
+in-order delivery, which reintroduces global ordering across streams. As such,
+several of the considerations about blocked streams described in {{Section 2.1.2
+of QPACK}} do not apply. Implementations of HTTP/3 over QMux version could
+advertise more generous values of SETTINGS_QPACK_BLOCKED_STREAMS in order to
+improve compression efficiency.
+
 
 # Starting HTTP/3 over QMux
 
