@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T00:16:14.189984+00:00",
+  "timestamp": "2026-05-17T00:29:23.168086+00:00",
   "repo": "kazuho/draft-kazuho-httpbis-http3-on-streams",
   "labels": [
     {
@@ -65,6 +65,37 @@
       "updatedAt": "2024-11-14T16:41:09Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOKyF5GM8AAAABCVBxcw",
+      "title": "Why is extended CONNECT a requirement?",
+      "url": "https://github.com/kazuho/draft-kazuho-httpbis-http3-on-streams/issues/6",
+      "state": "CLOSED",
+      "author": "LPardue",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> Servers speaking HTTP/3 on Streams MUST implement the Extended CONNECT scheme defined in [[EXT-CONNECT3](https://kazuho.github.io/draft-kazuho-httpbis-http3-on-streams/draft-kazuho-httpbis-http3-on-streams.html#EXT-CONNECT3)].\n\nI can't recall why we added this, it seems a bit odd since the regular SETTINGS mechanism works. Forcing this feature would seem to add friction between HTTP/3 over QUIC and HTTP/3 over QMUX implementations: if you're a client MUST you always check for this extension and close the connection if unsupported? \n\nI think it would be easier to drop this",
+      "createdAt": "2026-05-15T04:22:34Z",
+      "updatedAt": "2026-05-15T23:17:28Z",
+      "closedAt": "2026-05-15T23:17:28Z",
+      "comments": [
+        {
+          "author": "kazuho",
+          "authorAssociation": "OWNER",
+          "body": "I _think_ the intent is to avoid 1-RTT penalty when doing a 0-RTT resumption of an H3-over-QMux connection. Without such a requirement, a client cannot include an extended CONNECT request in the 0-RTT data, because the server might not advertise support for extended CONNECT on the resumed connection.\n\nThat said, I do not care either ways.",
+          "createdAt": "2026-05-15T07:16:39Z",
+          "updatedAt": "2026-05-15T07:16:39Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "COLLABORATOR",
+          "body": "CONNECT is neither `safe` or `idempotent` (source: https://www.iana.org/assignments/http-methods/http-methods.xhtml)\n\nWhile I can see the potential advantage in the mandate, its seems to be trying to backdoor litigate on a broader issue related to extended CONNECT. \n\nI'd like to remove this for now for simplicity, we can reconsider it later on.",
+          "createdAt": "2026-05-15T16:39:37Z",
+          "updatedAt": "2026-05-15T16:39:37Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -143,6 +174,296 @@
           "createdAt": "2024-03-28T00:07:47Z",
           "updatedAt": "2024-03-28T00:07:47Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOKyF5GM7bxlkl",
+      "title": "Switch to QMux",
+      "url": "https://github.com/kazuho/draft-kazuho-httpbis-http3-on-streams/pull/4",
+      "state": "MERGED",
+      "author": "LPardue",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Now that QMux has been adopted by the QUIC WG, we have a concrete\r\nlayer to build on that has already captured some design constraints\r\nand recommendations.\r\n\r\nThis change replaces the old usage of \"QUIC on streams\" with QMux.\r\nWe drop any mention of plaintext, since QMux requires TLS.\r\n",
+      "createdAt": "2026-05-15T03:58:10Z",
+      "updatedAt": "2026-05-15T07:12:34Z",
+      "baseRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "baseRefName": "main",
+      "baseRefOid": "54c2b0ce33f02f8cd6376e041b4f2b1946a5faf8",
+      "headRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "headRefName": "align-to-qmux-terms",
+      "headRefOid": "89141e74593cb6a961fcba2668fd3ae59b990a86",
+      "closedAt": "2026-05-15T07:12:34Z",
+      "mergedAt": "2026-05-15T07:12:34Z",
+      "mergedBy": "kazuho",
+      "mergeCommit": {
+        "oid": "253c44c5f5f197d395523c70bf86838d768d2b3f"
+      },
+      "comments": [
+        {
+          "author": "LPardue",
+          "authorAssociation": "COLLABORATOR",
+          "body": "CI failures can be fixed via https://github.com/kazuho/draft-kazuho-httpbis-http3-on-streams/pull/5",
+          "createdAt": "2026-05-15T04:15:40Z",
+          "updatedAt": "2026-05-15T04:15:40Z"
+        },
+        {
+          "author": "kazuho",
+          "authorAssociation": "OWNER",
+          "body": "Thank you for the PR! Let's merge.",
+          "createdAt": "2026-05-15T07:12:31Z",
+          "updatedAt": "2026-05-15T07:12:31Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOKyF5GM7bx11J",
+      "title": "Update template deps",
+      "url": "https://github.com/kazuho/draft-kazuho-httpbis-http3-on-streams/pull/5",
+      "state": "MERGED",
+      "author": "LPardue",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is auto generated by running `make update-files`\r\n\r\n- **Automatic update of .gitignore**\r\n- **Remove old .github/CODEOWNERS**\r\n- **Automatic update of .github/CODEOWNERS**\r\n- **Automatic update of Makefile**\r\n- **Automatic update of README.md**\r\n- **Automatic update of .github/workflows/ghpages.yml**\r\n- **Automatic update of .github/workflows/publish.yml**\r\n- **Automatic update of .github/workflows/archive.yml**\r\n- **Automatic update of .github/workflows/update.yml**\r\n",
+      "createdAt": "2026-05-15T04:15:12Z",
+      "updatedAt": "2026-05-15T07:11:17Z",
+      "baseRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "baseRefName": "main",
+      "baseRefOid": "54c2b0ce33f02f8cd6376e041b4f2b1946a5faf8",
+      "headRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "headRefName": "update-files",
+      "headRefOid": "f613363204159be301f8245b17ea56635389aa87",
+      "closedAt": "2026-05-15T07:11:16Z",
+      "mergedAt": "2026-05-15T07:11:16Z",
+      "mergedBy": "kazuho",
+      "mergeCommit": {
+        "oid": "5b9ff1d33a6a96a5f4702dad36045baeaeb46a6b"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOKyF5GM7b_to4",
+      "title": "Meta updates (dates, author details, document filename)",
+      "url": "https://github.com/kazuho/draft-kazuho-httpbis-http3-on-streams/pull/7",
+      "state": "OPEN",
+      "author": "LPardue",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- meta updates for 2026\r\n- rename draft to draft-kazuho-httpbis-http3-over-qmux\r\n\r\nThis would switch the I-D to be draft-kazuho-httpbis-http3-over-qmux(-00). We'd want to take care when publishing to ensure its linked to the previous name. A one-time manual submission is usually the most cast-iron way to ensure it happens during the transition.",
+      "createdAt": "2026-05-15T16:46:46Z",
+      "updatedAt": "2026-05-15T23:51:07Z",
+      "baseRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "baseRefName": "main",
+      "baseRefOid": "253c44c5f5f197d395523c70bf86838d768d2b3f",
+      "headRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "headRefName": "meta-updates",
+      "headRefOid": "13fa598102e0736c31dd74d40a8297793af5df57",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "kazuho",
+          "authorAssociation": "OWNER",
+          "body": "Thank you for the PR. I'm not merging this now as it'd create conflicts, but the changes look good. I think either of us can do it any time.",
+          "createdAt": "2026-05-15T23:51:06Z",
+          "updatedAt": "2026-05-15T23:51:06Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKyF5GM8AAAABAGpITA",
+          "commit": {
+            "abbreviatedOid": "13fa598"
+          },
+          "author": "kazuho",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-15T23:16:30Z",
+          "updatedAt": "2026-05-15T23:16:30Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOKyF5GM7b_yL-",
+      "title": "Remove mandatory extended CONNECT support",
+      "url": "https://github.com/kazuho/draft-kazuho-httpbis-http3-on-streams/pull/8",
+      "state": "MERGED",
+      "author": "LPardue",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #6\r\n",
+      "createdAt": "2026-05-15T16:50:01Z",
+      "updatedAt": "2026-05-15T23:17:27Z",
+      "baseRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "baseRefName": "main",
+      "baseRefOid": "253c44c5f5f197d395523c70bf86838d768d2b3f",
+      "headRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "headRefName": "remove-connect",
+      "headRefOid": "28b0aadf416b6acf01fbd159a449d4fbe995cade",
+      "closedAt": "2026-05-15T23:17:27Z",
+      "mergedAt": "2026-05-15T23:17:27Z",
+      "mergedBy": "kazuho",
+      "mergeCommit": {
+        "oid": "0558d4ccfda9f650feb18e467cdd1919b4ab9f40"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOKyF5GM7b_5NX",
+      "title": "Add minimal security considerations",
+      "url": "https://github.com/kazuho/draft-kazuho-httpbis-http3-on-streams/pull/9",
+      "state": "MERGED",
+      "author": "LPardue",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "At this time I don't think there are any additional considerations to make, we'll find out later if we overlooked anything \ud83d\ude06 ",
+      "createdAt": "2026-05-15T16:55:52Z",
+      "updatedAt": "2026-05-15T23:17:54Z",
+      "baseRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "baseRefName": "main",
+      "baseRefOid": "253c44c5f5f197d395523c70bf86838d768d2b3f",
+      "headRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "headRefName": "security-cons",
+      "headRefOid": "1974c2d3cbf9e974909ddedd1247f92b0fbd493f",
+      "closedAt": "2026-05-15T23:17:54Z",
+      "mergedAt": "2026-05-15T23:17:54Z",
+      "mergedBy": "kazuho",
+      "mergeCommit": {
+        "oid": "a75f0078374da18f50afce8431c949bd472c0cb9"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOKyF5GM7b_8kW",
+      "title": "Add forward-looking IANA action",
+      "url": "https://github.com/kazuho/draft-kazuho-httpbis-http3-on-streams/pull/10",
+      "state": "MERGED",
+      "author": "LPardue",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-05-15T16:59:06Z",
+      "updatedAt": "2026-05-15T23:15:41Z",
+      "baseRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "baseRefName": "main",
+      "baseRefOid": "253c44c5f5f197d395523c70bf86838d768d2b3f",
+      "headRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "headRefName": "min-iana",
+      "headRefOid": "99074368fae03860a44d1355f27c5aba2896d639",
+      "closedAt": "2026-05-15T23:15:23Z",
+      "mergedAt": "2026-05-15T23:15:23Z",
+      "mergedBy": "kazuho",
+      "mergeCommit": {
+        "oid": "334de7fab66fb5b7810c9b1d30f8900e249a3dcc"
+      },
+      "comments": [
+        {
+          "author": "kazuho",
+          "authorAssociation": "OWNER",
+          "body": "I like the _if_ :-) Thank you for the PR.",
+          "createdAt": "2026-05-15T23:15:41Z",
+          "updatedAt": "2026-05-15T23:15:41Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOKyF5GM7cASH_",
+      "title": "Add considerations for QPACK",
+      "url": "https://github.com/kazuho/draft-kazuho-httpbis-http3-on-streams/pull/11",
+      "state": "OPEN",
+      "author": "LPardue",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "QPACK over QMux doesn't have the same blocking considerations as\r\nQUIC, so capture that.\r\n\r\nFixes #3\r\n",
+      "createdAt": "2026-05-15T17:18:45Z",
+      "updatedAt": "2026-05-16T00:07:53Z",
+      "baseRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "baseRefName": "main",
+      "baseRefOid": "253c44c5f5f197d395523c70bf86838d768d2b3f",
+      "headRepository": "kazuho/draft-kazuho-httpbis-http3-on-streams",
+      "headRefName": "qpack",
+      "headRefOid": "247b3262971ff4793dadf3e992701a477a66bc1d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKyF5GM8AAAABAGrL2Q",
+          "commit": {
+            "abbreviatedOid": "8b72e38"
+          },
+          "author": "kazuho",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-15T23:23:46Z",
+          "updatedAt": "2026-05-15T23:46:04Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\n{{Section 4.2.1 of RFC9114}}. QPACK is designed to operate\nover QUIC version 1, which does not provide guarantees of global ordering across\n```\n\nThis is purely editorial, and I don't mind either ways.",
+              "createdAt": "2026-05-15T23:23:46Z",
+              "updatedAt": "2026-05-15T23:46:04Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\nhead-of-line blocking and optimal compression ratio ({{Section 2.1.2 of QPACK}}).\n```\n\nThe change proposed below removes the reference to Section 2.1.2 of QPACK, therefore it is moved here.",
+              "createdAt": "2026-05-15T23:28:12Z",
+              "updatedAt": "2026-05-15T23:46:04Z"
+            },
+            {
+              "originalPosition": 17,
+              "body": "I'm not sure about this advice.\n\nRaising SETTINGS_QPACK_BLOCKED_STREAMS increases the risk at the receiver side, because a malicious sender can intentionally send things out of order and force the receiver to buffer them. Also, it does not necessarily help the sender.\n\nI think what we want to do here is to point out that referencing dynamic table entries sent on the wire never causes the decoder to block.\n\n```suggestion\nQMux version 1 operates on top of a transport layer that guarantees\nin-order delivery and guarantees global ordering across streams. When HTTP/3\nover QMux is used, QPACK decoders will never be blocked due to packet losses.\nTo improve compression efficiency, QPACK encoders can reference a dynamic table\nentry as soon as the entry is emitted to the underlying transport, regardless of\nthe `SETTINGS_QPACK_BLOCKED_STREAMS` value advertised by the peer.\n```",
+              "createdAt": "2026-05-15T23:44:26Z",
+              "updatedAt": "2026-05-15T23:46:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKyF5GM8AAAABAGzxfQ",
+          "commit": {
+            "abbreviatedOid": "8b72e38"
+          },
+          "author": "LPardue",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-16T00:07:01Z",
+          "updatedAt": "2026-05-16T00:07:01Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "I'll totally defer to the QPACK experts on this one. The issue was an offhand comment I tried to capture at the time, if your suggestion represents the spirit of that, SGTM.",
+              "createdAt": "2026-05-16T00:07:01Z",
+              "updatedAt": "2026-05-16T00:07:01Z"
+            }
+          ]
         }
       ]
     }
