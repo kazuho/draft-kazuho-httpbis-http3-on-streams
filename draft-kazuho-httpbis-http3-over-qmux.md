@@ -1,6 +1,6 @@
 ---
 title: "HTTP/3 over QMux"
-docname: draft-kazuho-httpbis-http3-on-streams-latest
+docname: draft-kazuho-httpbis-http3-over-qmux-latest
 category: std
 wg: httpbis
 ipr: trust200902
@@ -18,7 +18,7 @@ author:
     email: lucas@lucaspardue.com
 -
     fullname: Jana Iyengar
-    organization: Fastly
+    organization: Netflix
     email: jri.ietf@gmail.com
 
 normative:
@@ -42,7 +42,7 @@ This document specifies how to use HTTP/3 over QMux.
 
 # Introduction
 
-As of 2023, HTTP/2 {{RFC9113}} remains the most widely used version of
+As of 2026, HTTP/2 {{RFC9113}} remains the most widely used version of
 HTTP across the Internet, although the adoption rate of HTTP/3
 {{RFC9114}} is increasing rapidly.
 
