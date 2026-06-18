@@ -7,12 +7,12 @@ Internet-Draft                                                    Fastly
 Intended status: Standards Track                               L. Pardue
 Expires: 20 December 2026                                     Cloudflare
                                                               J. Iyengar
-                                                                  Fastly
+                                                                 Netflix
                                                             18 June 2026
 
 
                             HTTP/3 over QMux
-              draft-kazuho-httpbis-http3-on-streams-latest
+              draft-kazuho-httpbis-http3-over-qmux-latest
 
 Abstract
 
@@ -78,7 +78,7 @@ Table of Contents
 
 1.  Introduction
 
-   As of 2023, HTTP/2 [HTTP/2] remains the most widely used version of
+   As of 2026, HTTP/2 [HTTP/2] remains the most widely used version of
    HTTP across the Internet, although the adoption rate of HTTP/3
    [HTTP/3] is increasing rapidly.
 
@@ -250,5 +250,5 @@ Authors' Addresses
 
 
    Jana Iyengar
-   Fastly
+   Netflix
    Email: jri.ietf@gmail.com
