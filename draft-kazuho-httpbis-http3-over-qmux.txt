@@ -5,10 +5,10 @@
 httpbis                                                           K. Oku
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                               L. Pardue
-Expires: 20 December 2026                                     Cloudflare
+Expires: 28 December 2026                                     Cloudflare
                                                               J. Iyengar
                                                                  Netflix
-                                                            18 June 2026
+                                                            26 June 2026
 
 
                             HTTP/3 over QMux
@@ -27,7 +27,7 @@ Discussion Venues
    https://lists.w3.org/Archives/Public/ietf-http-wg/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/kazuho/draft-kazuho-httpbis-http3-on-streams.
+   https://github.com/kazuho/draft-kazuho-httpbis-http3-over-qmux.
 
 Status of This Memo
 
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 December 2026.
+   This Internet-Draft will expire on 28 December 2026.
 
 Copyright Notice
 
