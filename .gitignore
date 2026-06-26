@@ -1,7 +1,7 @@
 *~
 /*-[0-9][0-9].xml
 archive.json
-draft-kazuho-httpbis-http3-on-streams.xml
+draft-kazuho-httpbis-http3-over-qmux.xml
 Gemfile.lock
 /.gems/
 *.html
