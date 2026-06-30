@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-28T00:33:31.959651+00:00",
+  "timestamp": "2026-06-30T00:34:00.177258+00:00",
   "repo": "kazuho/draft-kazuho-httpbis-http3-over-qmux",
   "labels": [
     {
@@ -402,7 +402,7 @@
       "labels": [],
       "body": "QPACK over QMux doesn't have the same blocking considerations as\r\nQUIC, so capture that.\r\n\r\nFixes #3\r\n",
       "createdAt": "2026-05-15T17:18:45Z",
-      "updatedAt": "2026-06-18T00:27:20Z",
+      "updatedAt": "2026-06-28T09:50:07Z",
       "baseRepository": "kazuho/draft-kazuho-httpbis-http3-over-qmux",
       "baseRefName": "main",
       "baseRefOid": "253c44c5f5f197d395523c70bf86838d768d2b3f",
@@ -466,6 +466,66 @@
               "body": "I'll totally defer to the QPACK experts on this one. The issue was an offhand comment I tried to capture at the time, if your suggestion represents the spirit of that, SGTM.",
               "createdAt": "2026-05-16T00:07:01Z",
               "updatedAt": "2026-05-16T00:07:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKyF5GM8AAAABEWw-vQ",
+          "commit": {
+            "abbreviatedOid": "8b72e38"
+          },
+          "author": "tatsuhiro-t",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-28T08:41:59Z",
+          "updatedAt": "2026-06-28T08:41:59Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "I think this implies that QPACK encoder should prioritize QPACK encoder stream over the request stream otherwise the QPACK decoder is blocked even if they operate on a reliable stream.  Perhaps, say something like QPACK encoder should send QPACK encoder stream first before sending request stream so that QPACK decoder never be blocked?\r\n",
+              "createdAt": "2026-06-28T08:41:59Z",
+              "updatedAt": "2026-06-28T08:41:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKyF5GM8AAAABEW1bsg",
+          "commit": {
+            "abbreviatedOid": "8b72e38"
+          },
+          "author": "kazuho",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-28T09:45:28Z",
+          "updatedAt": "2026-06-28T09:45:28Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "@tatsuhiro-t \r\n> say something like QPACK encoder should send QPACK encoder stream first before sending request stream so that QPACK decoder never be blocked?\r\n\r\nThanks, I think the current text suggests that by saying, quote: \"QPACK encoders can reference a dynamic table entry as soon as the entry is emitted to the underlying transport\"?",
+              "createdAt": "2026-06-28T09:45:28Z",
+              "updatedAt": "2026-06-28T09:45:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKyF5GM8AAAABEW1xVw",
+          "commit": {
+            "abbreviatedOid": "8b72e38"
+          },
+          "author": "tatsuhiro-t",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-28T09:50:07Z",
+          "updatedAt": "2026-06-28T09:50:07Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "OK, so it covers the ordering issue between streams.  That works for me thanks.",
+              "createdAt": "2026-06-28T09:50:07Z",
+              "updatedAt": "2026-06-28T09:50:07Z"
             }
           ]
         }
